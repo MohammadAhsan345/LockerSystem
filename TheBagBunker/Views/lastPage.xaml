@@ -1,0 +1,83 @@
+﻿<Page x:Class="TheBagBunker.Views.lastPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TheBagBunker.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="400"
+      Title="Home">
+
+    <Grid Background="#D52033">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="390" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Image Source="/Images/logo.png" Width="150" Height="150" Margin="0,40,0,40"  />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="390" Width="400" >
+            <Border CornerRadius="50" Background="White" >
+                <StackPanel>
+                    <Grid HorizontalAlignment="Center" Margin="0,30,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text=" " FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <Grid HorizontalAlignment="Center" Grid.Row="1">
+                            <Image Source="/Images/checkmark1.png" Width="90" Height="90" VerticalAlignment="Top"  />
+                            <TextBlock Text="Please collect your luggage from the opened locker." TextWrapping="Wrap" FontSize="22" FontWeight="Bold" TextAlignment="Center" LineHeight="1" Padding="0,90,0,0"/>
+                            <TextBlock Text="Thanks for using The Bag Bunker" FontSize="12"  TextAlignment="Center" Padding="0,150,0,0"/>
+
+                        </Grid>
+
+                        <Button Grid.Row="2" Name="lastButton" Background="#D52033"
+                     Content="See You Soon" BorderBrush="#D3D3D3" Width="140"  Height="30" Foreground="White" FontWeight="Bold"
+    HorizontalAlignment="Center">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border" CornerRadius="15"
+Background="{TemplateBinding Background}" 
+BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="red" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                    </Grid>
+                    
+                   
+
+ 
+
+
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Image Source="/Images/footer.png" Stretch="Fill" />
+        </Grid>
+        <Grid Grid.Row="3" VerticalAlignment="Bottom" Background="#2D040C" Height="30">
+        </Grid>
+    </Grid>
+</Page>

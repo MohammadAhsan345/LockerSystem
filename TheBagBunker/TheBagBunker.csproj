@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>False</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\ApplePay.png" />
+    <None Remove="Images\checkmark.png" />
+    <None Remove="Images\checkmark1.png" />
+    <None Remove="Images\collect.png" />
+    <None Remove="Images\dropoff.png" />
+    <None Remove="Images\footer.png" />
+    <None Remove="Images\germany.png" />
+    <None Remove="Images\Google Pay.png" />
+    <None Remove="Images\greenflag.png" />
+    <None Remove="Images\ico.ico" />
+    <None Remove="Images\icon.ico" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\MasterCard.png" />
+    <None Remove="Images\pakistan.png" />
+    <None Remove="Images\PayPal.png" />
+    <None Remove="Images\russia.png" />
+    <None Remove="Images\saudiArabia.png" />
+    <None Remove="Images\spain.png" />
+    <None Remove="Images\unitedStates.png" />
+    <None Remove="Images\Visa.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AForge" Version="2.2.5" />
+    <PackageReference Include="MySql.Data" Version="9.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ApplePay.png" />
+    <Resource Include="Images\checkmark.png" />
+    <Resource Include="Images\checkmark1.png" />
+    <Resource Include="Images\collect.png" />
+    <Resource Include="Images\dropoff.png" />
+    <Resource Include="Images\footer.png" />
+    <Resource Include="Images\germany.png" />
+    <Resource Include="Images\Google Pay.png" />
+    <Resource Include="Images\greenflag.png" />
+    <Resource Include="Images\ico.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\MasterCard.png" />
+    <Resource Include="Images\pakistan.png" />
+    <Resource Include="Images\PayPal.png" />
+    <Resource Include="Images\russia.png" />
+    <Resource Include="Images\saudiArabia.png" />
+    <Resource Include="Images\spain.png" />
+    <Resource Include="Images\unitedStates.png" />
+    <Resource Include="Images\Visa.png" />
+  </ItemGroup>
+
+</Project>

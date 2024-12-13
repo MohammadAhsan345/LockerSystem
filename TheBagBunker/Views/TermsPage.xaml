@@ -1,0 +1,151 @@
+﻿<Page x:Class="TheBagBunker.Views.TermsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TheBagBunker.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="450"
+      Title="Terms and Conditions">
+
+    <Page.Resources>
+        <Style TargetType="Hyperlink">
+            <Setter Property="Foreground" Value="#D52033"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="#D52033">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="390" />
+            <RowDefinition Height="150" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Image Source="/Images/logo.png" Width="150" Height="150" Margin="0,40,0,40"  />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="390" Width="400" >
+            <Border CornerRadius="50" Background="White" >
+                <StackPanel>
+                    <Grid HorizontalAlignment="Center" Margin="0,30,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="250" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Terms &amp; Conditions" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+
+                        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Storage Duration: Items may be stored for a maximum of [Xhours/days] per transaction. Any extension beyond the initial period will incur additional fees." TextWrapping="Wrap" TextAlignment="Justify" FontSize="12" Foreground="gray" Margin="0,0,0,10"/>
+                            <TextBlock Grid.Row="1"  Text="Contents and Prohibited Items: Users are strictly prohibited from storing illegal, hazardous, or perishable items. The Provider reserves the right to refuse storage of such items or report any suspicious contents to local authorities." TextAlignment="Justify" TextWrapping="Wrap" FontSize="12" Foreground="Gray" Margin="0,0,0,20"/>
+
+                            <StackPanel Grid.Row="2"  Orientation="Horizontal" >
+                                <CheckBox Name="AgreementCheckBox" VerticalAlignment="Center" Margin="0,0,10,0">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="BorderBrush" Value="Red" />
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="Foreground" Value="Black" />
+                                        </Style>
+                                    </CheckBox.Style>
+                                    <CheckBox.Template>
+                                        <ControlTemplate TargetType="CheckBox">
+                                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" Padding="2">
+                                                <Grid>
+                                                    <Path x:Name="CheckMark"
+                       Data="M 0 0 L 0 10 L 10 10 L 10 0 Z"
+                       Fill="Transparent"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Width="10"
+                       Height="10"
+                       Visibility="Hidden"/>
+                                                </Grid>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                                    <Setter TargetName="CheckMark" Property="Fill" Value="#D52033"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </CheckBox.Template>
+                                </CheckBox>
+
+                                <TextBlock FontSize="12" Foreground="Black" TextWrapping="Wrap" Width="352" TextAlignment="Justify">
+ <Run Text="I have reviewed the "/>
+ <Hyperlink NavigateUri="http://www.example.com">Terms and Conditions</Hyperlink>
+ <Run Text=" and  "/>
+ <Hyperlink NavigateUri="http://www.example.com">agree to abide</Hyperlink>                           
+ <Run Text=" by them when using The Bag Bunker's storage service."/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <Button Grid.Row="2" Name="nextButton" Background="#D52033"
+Content="Submit" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
+HorizontalAlignment="Center" Click="NavigateToNextPage"
+IsEnabled="{Binding ElementName=AgreementCheckBox, Path=IsChecked}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border" CornerRadius="15"
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <!-- Hover Effect -->
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="red" />
+                                                        <Setter TargetName="border" Property="BorderBrush" Value="red" />
+                                                        <Setter Property="Foreground" Value="Black" />
+                                                    </Trigger>
+                                                    <!-- Disabled State -->
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="border" Property="Background" Value="lightGray" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+
+                  
+
+                   
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+
+
+
+        <Grid Grid.Row="2">
+            <Image Source="/Images/footer.png" Stretch="Fill" />
+        </Grid>
+        <Grid Grid.Row="3" VerticalAlignment="Bottom" Background="#2D040C" Height="30" >
+        </Grid>
+    </Grid>
+</Page>
