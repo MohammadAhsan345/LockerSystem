@@ -32,13 +32,13 @@
                         <TextBlock Grid.Row="0" Text=" " FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
                         <Grid HorizontalAlignment="Center" Grid.Row="1">
                             <Image Source="/Images/checkmark1.png" Width="90" Height="90" VerticalAlignment="Top"  />
-                            <TextBlock Text="Please collect your luggage from the opened locker." TextWrapping="Wrap" FontSize="22" FontWeight="Bold" TextAlignment="Center" LineHeight="1" Padding="0,90,0,0"/>
-                            <TextBlock Text="Thanks for using The Bag Bunker" FontSize="12"  TextAlignment="Center" Padding="0,150,0,0"/>
+                            <TextBlock Text="{Binding PageTitle}" TextWrapping="Wrap" FontSize="22" FontWeight="Bold" TextAlignment="Center" LineHeight="1" Padding="0,90,0,0"/>
+                            <TextBlock Text="{Binding Des}" FontSize="12"  TextAlignment="Center" Padding="0,150,0,0"/>
 
                         </Grid>
 
-                        <Button Grid.Row="2" Name="lastButton" Background="#D52033"
-                     Content="See You Soon" BorderBrush="#D3D3D3" Width="140"  Height="30" Foreground="White" FontWeight="Bold"
+                        <Button Grid.Row="2" Name="lastButton" Background="#D52033" Click="lastButton_Click"
+                     Content="{Binding ButtonS}" BorderBrush="#D3D3D3" Width="140"  Height="30" Foreground="White" FontWeight="Bold"
     HorizontalAlignment="Center">
                             <Button.Style>
                                 <Style TargetType="Button">

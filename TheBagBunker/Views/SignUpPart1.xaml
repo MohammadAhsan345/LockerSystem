@@ -29,7 +29,7 @@
                             <RowDefinition Height="250" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Sign up" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
                         <Grid Grid.Row="1" HorizontalAlignment="Center"  >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -43,13 +43,13 @@
 
                             <!-- Full Name -->
                             <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="5">
-                                <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
+                                <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4" Height="46" VerticalAlignment="Bottom">
                                     <Grid>
-                                        <TextBlock Text="Full Name" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Name1}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
                                         <TextBox Name="FullNameTextBox" Padding="10" BorderThickness="0" 
  GotFocus="FullNameTextBox_GotFocus" 
  LostFocus="FullNameTextBox_LostFocus"/>
-                                        <TextBlock x:Name="PlaceholderText" Text="Type Your Name" Foreground="LightGray" 
+                                        <TextBlock x:Name="PlaceholderText" Text="{Binding PlaceHolderName}" Foreground="LightGray" 
    IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </Grid>
                                 </Border>
@@ -58,15 +58,15 @@
 
 
                             <!-- Nationality -->
-                            <Grid Grid.Row="1" Grid.Column="0" Margin="5 20 5 5">
+                            <Grid Grid.Row="1" Grid.Column="0" Margin="5 20 5 5" Width="170">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Nationality" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Nationality}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
 
                                         <!-- Custom ComboBox Button -->
                                         <Button x:Name="nationalityComboBox" Padding="10" BorderThickness="0" Background="White" Foreground="lightGray" Click="nationalityComboBox_Click">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Name="txtSelectedItem" Text="Select Nationality" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,-3,35,0"/>
+                                                <TextBlock x:Name="txtSelectedItem" Text="{Binding PlaceHolderCountry}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,-3,35,0"/>
                                                 <!-- Arrow pointing down -->
                                                 <Path Data="M 0 0 L 8 4 L 16 0 Z" Fill="Gray" Width="10" Height="6" VerticalAlignment="Center" Stretch="Fill" Margin="-30 0 0 0" />
                                             </StackPanel>
@@ -75,11 +75,8 @@
                                         <!-- Popup for ListBox -->
                                         <Popup x:Name="popupListBox" PlacementTarget="{Binding ElementName=nationalityComboBox}" Placement="Bottom" IsOpen="False" StaysOpen="False">
                                             <Border BorderBrush="LightGray" BorderThickness="1" Background="White" Width="{Binding ElementName=nationalityComboBox, Path=ActualWidth}">
-                                                <ListBox x:Name="lstComboItems" SelectionChanged="lstComboItems_SelectionChanged">
-                                                    <ListBoxItem Content="Pakistani"/>
-                                                    <ListBoxItem Content="Spanish"/>
-                                                    <ListBoxItem Content="Arabian"/>
-                                                </ListBox>
+                                                <ListBox x:Name="lstComboItems" SelectionChanged="lstComboItems_SelectionChanged"
+         ItemsSource="{Binding Countries}" DisplayMemberPath="Name"/>
                                             </Border>
                                         </Popup>
 
@@ -92,14 +89,14 @@
 
 
                             <!-- Passport No. -->
-                            <Grid Grid.Row="1" Grid.Column="1" Margin="5 20 5 5">
+                            <Grid Grid.Row="1" Grid.Column="1" Margin="5 20 5 5" Width="170">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Passport No." Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Passport}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
                                         <TextBox Name="PassportTextBox" Padding="10" BorderThickness="0"                     
  GotFocus="PassportTextBox_GotFocus" 
  LostFocus="PassportTextBox_LostFocus"/>
-                                        <TextBlock x:Name="PlaceholderText1" Text="Enter Passport Number" Foreground="LightGray" IsHitTestVisible="False"
+                                        <TextBlock x:Name="PlaceholderText1" Text="{Binding PlaceHolderPassport}" Foreground="LightGray" IsHitTestVisible="False"
    VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </Grid>
                                 </Border>
@@ -109,11 +106,11 @@
                             <Grid Grid.Row="2" Grid.Column="0" Margin="5 20 5 5">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Phone" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Phone}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
                                         <TextBox Name="PhoneTextBox" Padding="10" BorderThickness="0" 
    GotFocus="PhoneTextBox_GotFocus" 
  LostFocus="PhoneTextBox_LostFocus"/>
-                                        <TextBlock x:Name="PlaceholderText2" Text="Number" Foreground="LightGray" IsHitTestVisible="False"
+                                        <TextBlock x:Name="PlaceholderText2" Text="{Binding PlaceHolderNumber}" Foreground="LightGray" IsHitTestVisible="False"
    VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </Grid>
                                 </Border>
@@ -123,11 +120,11 @@
                             <Grid Grid.Row="2" Grid.Column="1" Margin="5 20 5 5">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Email" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Email}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
                                         <TextBox Name="EmailTextBox" Padding="10" BorderThickness="0" 
                                      GotFocus="EmailTextBox_GotFocus" 
  LostFocus="EmailTextBox_LostFocus"/>
-                                        <TextBlock x:Name="PlaceholderText3" Text="EX*mailid@company.com" Foreground="LightGray" IsHitTestVisible="False"
+                                        <TextBlock x:Name="PlaceholderText3" Text="{Binding PlaceHolderEmail}" Foreground="LightGray" IsHitTestVisible="False"
    VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </Grid>
                                 </Border>
@@ -135,7 +132,7 @@
 
                         </Grid>
                         <Button Grid.Row="2" Name="nextButton" Background="#D52033"
-Content="Submit" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
+Content="{Binding ButtonS}" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
 HorizontalAlignment="Center" Click="NavigateToNextPage" VerticalAlignment="Top">
                             <Button.Style>
                                 <Style TargetType="Button">

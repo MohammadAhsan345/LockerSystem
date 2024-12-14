@@ -30,6 +30,7 @@
     <None Remove="Images\spain.png" />
     <None Remove="Images\unitedStates.png" />
     <None Remove="Images\Visa.png" />
+    <None Remove="translations.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,6 +64,9 @@
     <Resource Include="Images\spain.png" />
     <Resource Include="Images\unitedStates.png" />
     <Resource Include="Images\Visa.png" />
+    <EmbeddedResource Include="translations.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

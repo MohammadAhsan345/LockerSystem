@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
@@ -18,7 +19,14 @@ namespace TheBagBunker.Views
         private void NavigateToNextPage(object sender, System.Windows.RoutedEventArgs e)
         {
             // Navigate to the next page
-            this.NavigationService.Navigate(new Page1());
+            if (CLanguage.currentLanguage == null)
+            {
+                MessageBox.Show("Choose Language..");
+            }
+            else
+            {
+                this.NavigationService.Navigate(new Page1());
+            }
         }
 
         private void NavigateToBackPage(object sender, System.Windows.RoutedEventArgs e)
@@ -39,6 +47,14 @@ namespace TheBagBunker.Views
             if (sender is Button clickedButton)
             {
                 clickedButton.BorderBrush = Brushes.Red;
+                // Access the TextBlock within the Button's ControlTemplate
+                var textBlock = FindVisualChild<TextBlock>(clickedButton);
+
+                if (textBlock != null)
+                {
+                    // Set the current language based on the TextBlock's Text
+                    CLanguage.currentLanguage = textBlock.Text.Substring(0, 2);
+                }
             }
         }
 
@@ -60,6 +76,23 @@ namespace TheBagBunker.Views
                 }
             }
         }
+        private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T t)
+                {
+                    return t;
+                }
 
+                T childOfChild = FindVisualChild<T>(child);
+                if (childOfChild != null)
+                {
+                    return childOfChild;
+                }
+            }
+            return null;
+        }
     }
 }

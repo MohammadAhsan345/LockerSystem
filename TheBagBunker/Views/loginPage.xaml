@@ -29,7 +29,7 @@
                             <RowDefinition Height="250" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Login" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
                         <Grid HorizontalAlignment="Center"  Width="320" Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -40,16 +40,16 @@
                             <Grid Grid.Row="0"  Margin="5">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Phone" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
+                                        <TextBlock Text="{Binding Op1}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0"/>
                                         <TextBox Name="PhoneTextBox" Padding="10" BorderThickness="0" GotFocus="phonetextbox_GotFocus" LostFocus="phonetextbox_LostFocus"/>
-                                        <TextBlock x:Name="PlaceholderText" Text="Your Phone Number" Foreground="LightGray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                        <TextBlock x:Name="PlaceholderText" Text="{Binding NP}" Foreground="LightGray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     </Grid>
                                 </Border>
                             </Grid>
                             <Grid Grid.Row="1" Margin="5 20 5 5">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Password" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
+                                        <TextBlock Text="{Binding Op2}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
                                         <Grid>
                                             <PasswordBox x:Name="PasswordBox" Padding="10" BorderThickness="0" 
                      GotFocus="PasswordBox_GotFocus"
@@ -70,7 +70,7 @@ Background="Transparent" BorderThickness="0">
 
                                         </Grid>
 
-                                        <TextBlock x:Name="PlaceholderPassword" Text="Please set a 6 digit password" Foreground="LightGray" 
+                                        <TextBlock x:Name="PlaceholderPassword" Text="{Binding PP}" Foreground="LightGray" 
                IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" />
                                     </Grid>
                                 </Border>
@@ -79,7 +79,7 @@ Background="Transparent" BorderThickness="0">
                         </Grid>
 
                         <Button Grid.Row="2" Name="loginButton" Background="#D52033"
-Content="Login" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
+Content="{Binding ButtonB}" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
     HorizontalAlignment="Center" Click="NavigateToNextPage">
                             <Button.Style>
                                 <Style TargetType="Button">

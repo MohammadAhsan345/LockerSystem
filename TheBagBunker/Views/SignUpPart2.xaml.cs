@@ -1,24 +1,45 @@
 ﻿using MySql.Data.MySqlClient;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using TheBagBunker.Helper;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
     /// <summary>
     /// Interaction logic for SignUpPart2.xaml
     /// </summary>
-    public partial class SignUpPart2 : Page
+    public partial class SignUpPart2 : Page, INotifyPropertyChanged
     {
         private int userId = 0;
         private int lockerId = 0;
         private SharedLibrary _sharedLibrary = new SharedLibrary();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly LocalizationHelper _localizationHelper;
+
+        public string Passwordlbl => _localizationHelper.GetTranslation("passwordPagePassword", CLanguage.currentLanguage);
+        public string RePasswordlbl => _localizationHelper.GetTranslation("passwordPageRePassword", CLanguage.currentLanguage);
+        public string PageTitle => _localizationHelper.GetTranslation("passwordPageTitle", CLanguage.currentLanguage);
+        public string ButtonS => _localizationHelper.GetTranslation("passwordPageButton", CLanguage.currentLanguage);
+        public string PP => _localizationHelper.GetTranslation("passwordPagePP", CLanguage.currentLanguage);
+        public string CPP => _localizationHelper.GetTranslation("passwordPageCP", CLanguage.currentLanguage);
+
         public SignUpPart2(int userId)
         {
             InitializeComponent();
+            _localizationHelper = new LocalizationHelper("translations.json");
+            DataContext = this;
             this.userId = userId;
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void NavigateToNextPage(object sender, RoutedEventArgs e)
@@ -140,12 +161,17 @@ namespace TheBagBunker.Views
                 PasswordTextBox2.Text = PasswordBox2.Password;
                 PasswordBox2.Visibility = Visibility.Collapsed;
                 PasswordTextBox2.Visibility = Visibility.Visible;
+
+                PasswordTextBox2.Focus();
+                PasswordTextBox2.SelectionStart = PasswordTextBox2.Text.Length;
             }
             else
             {
                 PasswordBox2.Password = PasswordTextBox2.Text;
                 PasswordBox2.Visibility = Visibility.Visible;
                 PasswordTextBox2.Visibility = Visibility.Collapsed;
+
+                PasswordBox2.Focus();
             }
         }
 
@@ -179,15 +205,23 @@ namespace TheBagBunker.Views
         {
             if (PasswordBox3.Visibility == Visibility.Visible)
             {
+                // Switch to TextBox (visible)
                 PasswordTextBox3.Text = PasswordBox3.Password;
                 PasswordBox3.Visibility = Visibility.Collapsed;
                 PasswordTextBox3.Visibility = Visibility.Visible;
+
+                // Set focus and move the caret to the end
+                PasswordTextBox3.Focus();
+                PasswordTextBox3.SelectionStart = PasswordTextBox3.Text.Length; // Move caret to the end
             }
             else
             {
                 PasswordBox3.Password = PasswordTextBox3.Text;
                 PasswordBox3.Visibility = Visibility.Visible;
                 PasswordTextBox3.Visibility = Visibility.Collapsed;
+
+                // Set focus back to PasswordBox
+                PasswordBox3.Focus();
             }
         }
 

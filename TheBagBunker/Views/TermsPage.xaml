@@ -36,7 +36,7 @@
                             <RowDefinition Height="250" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Terms &amp; Conditions" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
 
                         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0">
                             <Grid.RowDefinitions>
@@ -44,8 +44,8 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Text="Storage Duration: Items may be stored for a maximum of [Xhours/days] per transaction. Any extension beyond the initial period will incur additional fees." TextWrapping="Wrap" TextAlignment="Justify" FontSize="12" Foreground="gray" Margin="0,0,0,10"/>
-                            <TextBlock Grid.Row="1"  Text="Contents and Prohibited Items: Users are strictly prohibited from storing illegal, hazardous, or perishable items. The Provider reserves the right to refuse storage of such items or report any suspicious contents to local authorities." TextAlignment="Justify" TextWrapping="Wrap" FontSize="12" Foreground="Gray" Margin="0,0,0,20"/>
+                            <TextBlock Grid.Row="0" Text="{Binding TextBa}" TextWrapping="Wrap" TextAlignment="Justify" FontSize="12" Foreground="gray" Margin="0,0,0,10"/>
+                            <TextBlock Grid.Row="1"  Text="{Binding TextBb}" TextAlignment="Justify" TextWrapping="Wrap" FontSize="12" Foreground="Gray" Margin="0,0,0,20"/>
 
                             <StackPanel Grid.Row="2"  Orientation="Horizontal" >
                                 <CheckBox Name="AgreementCheckBox" VerticalAlignment="Center" Margin="0,0,10,0">
@@ -85,20 +85,13 @@
                                         </ControlTemplate>
                                     </CheckBox.Template>
                                 </CheckBox>
-
-                                <TextBlock FontSize="12" Foreground="Black" TextWrapping="Wrap" Width="352" TextAlignment="Justify">
- <Run Text="I have reviewed the "/>
- <Hyperlink NavigateUri="http://www.example.com">Terms and Conditions</Hyperlink>
- <Run Text=" and  "/>
- <Hyperlink NavigateUri="http://www.example.com">agree to abide</Hyperlink>                           
- <Run Text=" by them when using The Bag Bunker's storage service."/>
-                                </TextBlock>
+                                <TextBlock FontSize="12" Foreground="Black" TextWrapping="Wrap" Width="352" TextAlignment="Justify" Name="TextBlockWithLinks" />
                             </StackPanel>
                         </Grid>
 
 
                         <Button Grid.Row="2" Name="nextButton" Background="#D52033"
-Content="Submit" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
+Content="{Binding ButtonS}" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
 HorizontalAlignment="Center" Click="NavigateToNextPage"
 IsEnabled="{Binding ElementName=AgreementCheckBox, Path=IsChecked}">
                             <Button.Style>

@@ -1,9 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using TheBagBunker.Helper;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
@@ -11,13 +15,70 @@ namespace TheBagBunker.Views
     /// Interaction logic for SignUpPart1.xaml
     /// </summary>
 
-    public partial class SignUpPart1 : Page
+    public partial class SignUpPart1 : Page, INotifyPropertyChanged
     {
         private string _conString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
         private SharedLibrary _sharedLibrary = new SharedLibrary();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly LocalizationHelper _localizationHelper;
+
+        public string PageTitle => _localizationHelper.GetTranslation("signUpPageTitle", CLanguage.currentLanguage);
+        public string Name1 => _localizationHelper.GetTranslation("signUpPageFullName", CLanguage.currentLanguage);
+        public string Nationality => _localizationHelper.GetTranslation("signUpPageNationality", CLanguage.currentLanguage);
+        public string Passport => _localizationHelper.GetTranslation("signUpPagePassportNo", CLanguage.currentLanguage);
+        public string Phone => _localizationHelper.GetTranslation("signUpPagePhoneNumber", CLanguage.currentLanguage);
+        public string Email => _localizationHelper.GetTranslation("signUpPageEmail", CLanguage.currentLanguage);
+        public string ButtonS => _localizationHelper.GetTranslation("signUpPageButton", CLanguage.currentLanguage);
+        public string PlaceHolderName => _localizationHelper.GetTranslation("signUpPageNameP", CLanguage.currentLanguage);
+        public string PlaceHolderCountry => _localizationHelper.GetTranslation("signUpPageNationalityP", CLanguage.currentLanguage);
+        public string PlaceHolderPassport => _localizationHelper.GetTranslation("signUpPagePassportP", CLanguage.currentLanguage);
+        public string PlaceHolderNumber => _localizationHelper.GetTranslation("signUpPageNumberP", CLanguage.currentLanguage);
+        public string PlaceHolderEmail => _localizationHelper.GetTranslation("signUpPageEmailP", CLanguage.currentLanguage);
+
+        public List<Country> Countries { get; set; }
+
         public SignUpPart1()
         {
             InitializeComponent();
+            _localizationHelper = new LocalizationHelper("translations.json");
+            LoadCountries();
+            DataContext = this;
+        }
+        private void LoadCountries()
+        {
+            Countries = new List<Country>
+            {
+                new Country { Name = "Afghanistan" },
+                new Country { Name = "Albania" },
+                new Country { Name = "Algeria" },
+                new Country { Name = "Andorra" },
+                new Country { Name = "Angola" },
+                new Country { Name = "Argentina" },
+                new Country { Name = "Australia" },
+                new Country { Name = "Austria" },
+                new Country { Name = "Bahamas" },
+                new Country { Name = "Bahrain" },
+                new Country { Name = "Bangladesh" },
+                new Country { Name = "Belgium" },
+                new Country { Name = "Bhutan" },
+                new Country { Name = "Brazil" },
+                new Country { Name = "Canada" },
+                new Country { Name = "China" },
+                new Country { Name = "France" },
+                new Country { Name = "Germany" },
+                new Country { Name = "India" },
+                new Country { Name = "Pakistan" },
+                new Country { Name = "Spain" },
+                new Country { Name = "United States" }
+                // Add all the countries here
+            };
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private bool IsNotValidated()
@@ -243,12 +304,11 @@ namespace TheBagBunker.Views
 
         private void lstComboItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstComboItems.SelectedItem != null)
+            if (lstComboItems.SelectedItem is Country selectedCountry)
             {
-                txtSelectedItem.Text = ((ListBoxItem)lstComboItems.SelectedItem).Content.ToString();
-                popupListBox.IsOpen = false;
+                txtSelectedItem.Text = selectedCountry.Name; // Update the ComboBox Button Text
+                popupListBox.IsOpen = false; // Close the popup
             }
         }
-
     }
 }
