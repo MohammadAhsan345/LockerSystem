@@ -143,17 +143,7 @@ namespace TheBagBunker.Views
                 return;
             }
 
-            var transactionDetails = new Dictionary<string, string>
-            {
-                {"amount", (30 * _AEDExchangeRate).ToString()},
-                {"currency", "USD"},
-                {"orderId", "123444"},
-                {"methodCode", "visa"},
-                {"redirectUrl", "https://www.google.com/"},
-                {"notificationUrl", "https://www.google.com/"}
-            };
-            string result = _nayaxAdapter.InitiatePayment(transactionDetails);
-
+            ProceedWithPayment(30);
             isPaymentSucceded = true;
             if (isPaymentSucceded)
             {
@@ -165,9 +155,22 @@ namespace TheBagBunker.Views
 
         private void HandleLockerUpTimeOnLogin()
         {
+            ProceedWithPayment(30);
+            isPaymentSucceded = true;
+            if (isPaymentSucceded)
+            {
+                bool signal = _sharedLibrary.FreeTheLockerAndUser(userId, lockerId, 30, "AED");
+                if (signal)
+                    this.NavigationService.Navigate(new lastPage());
+                //this.NavigationService.Navigate(new successPayment());
+            }
+        }
+
+        private bool ProceedWithPayment(decimal amount)
+        {
             var transactionDetails = new Dictionary<string, string>
             {
-                {"amount", (30 * _AEDExchangeRate).ToString()},
+                {"amount", (amount * _AEDExchangeRate).ToString()},
                 {"currency", "USD"},
                 {"orderId", "123444"},
                 {"methodCode", "visa"},
@@ -185,21 +188,14 @@ namespace TheBagBunker.Views
                 {"trans_refNum", "123444"},
                 {"Order", "123444"},
                 {"trans_id", "1233"},
-                {"trans_amount", "10"},
+                {"trans_amount", (amount * _AEDExchangeRate).ToString()},
                 {"trans_currency", "USD"}
             };
 
             // Handle the notification response
             var notificationResponse = _nayaxAdapter.handleNotification(notification);
 
-            isPaymentSucceded = true;
-            if (isPaymentSucceded)
-            {
-                bool signal = _sharedLibrary.FreeTheLockerAndUser(userId, lockerId, 30, "AED");
-                if (signal)
-                    this.NavigationService.Navigate(new lastPage());
-                //this.NavigationService.Navigate(new successPayment());
-            }
+            return notificationResponse["status"].ToUpper() == "SUCCESS";
         }
 
         private void AssignLocker()
