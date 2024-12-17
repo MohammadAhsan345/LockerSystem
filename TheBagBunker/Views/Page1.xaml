@@ -29,7 +29,7 @@
                             <RowDefinition Height="250" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="You'd like to" FontSize="20" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="20" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
                         <Grid Grid.Row="1" HorizontalAlignment="Center" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
@@ -51,7 +51,7 @@
                                                         <ImageBrush ImageSource="/Images/collect.png"/>
                                                     </Ellipse.Fill>
                                                 </Ellipse>
-                                                <TextBlock Text="Collect" TextAlignment="Center" FontSize="14"  />
+                                                <TextBlock Text="{Binding Op1}" TextAlignment="Center" FontSize="14"  />
                                             </StackPanel>
                                         </Border>
                                     </ControlTemplate>
@@ -67,7 +67,7 @@
                                                         <ImageBrush ImageSource="/Images/dropoff.png"/>
                                                     </Ellipse.Fill>
                                                 </Ellipse>
-                                                <TextBlock Text="Dropoff" TextAlignment="Center" FontSize="14"  />
+                                                <TextBlock Text="{Binding Op2}" TextAlignment="Center" FontSize="14"  />
                                             </StackPanel>
                                         </Border>
                                     </ControlTemplate>
@@ -77,7 +77,7 @@
                         </Grid>
                         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" >
                             <Button x:Name="backButton" Background="#D3D3D3"
-Content="Back" BorderBrush="#D3D3D3" Width="80"  Height="30" Foreground="DarkGray" FontWeight="Bold"
+Content="{Binding ButtonB}" BorderBrush="#D3D3D3" Width="80"  Height="30" Foreground="DarkGray" FontWeight="Bold"
 HorizontalAlignment="Center" Click="NavigateToBackPage" Margin="0 0 10 0">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
@@ -102,7 +102,7 @@ HorizontalAlignment="Center" Click="NavigateToBackPage" Margin="0 0 10 0">
                             </Button>
 
                             <Button x:Name="nextButton" Background="#D52033"
-Content="Next" BorderBrush="#D3D3D3" Width="80"  Height="30" Foreground="White" FontWeight="Bold"
+Content="{Binding ButtonN}" BorderBrush="#D3D3D3" Width="80"  Height="30" Foreground="White" FontWeight="Bold"
 HorizontalAlignment="Center" Click="NavigateToNextPage">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">

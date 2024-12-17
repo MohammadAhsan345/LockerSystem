@@ -29,7 +29,7 @@
                             <RowDefinition Height="250" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Sign up" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
+                        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
 
                         <Grid Grid.Row="1" HorizontalAlignment="Center"  Width="320">
                             <Grid.RowDefinitions>
@@ -41,7 +41,7 @@
                             <Grid Grid.Row="0" Margin="5 0 0 5">
                                 <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
                                     <Grid>
-                                        <TextBlock Text="Password" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
+                                        <TextBlock Text="{Binding Passwordlbl}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
                                         <Grid>
                                             <PasswordBox x:Name="PasswordBox2" Padding="10" BorderThickness="0" 
                              GotFocus="PasswordBox2_GotFocus" 
@@ -61,15 +61,19 @@
                                             </Button>
                                         </Grid>
 
-                                        <TextBlock x:Name="PlaceholderPassword2" Text="Please set a 6 digit password" Foreground="LightGray" 
+                                        <TextBlock x:Name="PlaceholderPassword2" Text="{Binding PP}" Foreground="LightGray" 
                        IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" />
                                     </Grid>
                                 </Border>
                             </Grid>
                             <Grid Grid.Row="1" Margin="5 20 5 5">
-                                <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="14*"/>
+                                    <ColumnDefinition Width="141*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border CornerRadius="5" BorderBrush="LightGray" BorderThickness="1" Padding="4" Grid.ColumnSpan="2">
                                     <Grid>
-                                        <TextBlock Text="Re-Type Password" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
+                                        <TextBlock Text="{Binding RePasswordlbl}" Foreground="Gray" VerticalAlignment="Top" Margin="-5,-25,0,0" />
                                         <Grid>
                                             <PasswordBox x:Name="PasswordBox3" Padding="10" BorderThickness="0" 
                              GotFocus="PasswordBox3_GotFocus" 
@@ -89,7 +93,7 @@
                                             </Button>
                                         </Grid>
 
-                                        <TextBlock x:Name="PlaceholderPassword3" Text="Please set a 6 digit password" Foreground="LightGray" 
+                                        <TextBlock x:Name="PlaceholderPassword3" Text="{Binding CPP}" Foreground="LightGray" 
                        IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" />
                                     </Grid>
                                 </Border>
@@ -98,7 +102,7 @@
                         </Grid>
 
                         <Button Grid.Row="2" Name="nextButton" Background="#D52033"
-Content="Submit" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
+Content="{Binding ButtonS}" BorderBrush="#D3D3D3" Width="100"  Height="30" Foreground="White" FontWeight="Bold"
 HorizontalAlignment="Center" Click="NavigateToNextPage">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -122,10 +126,6 @@ HorizontalAlignment="Center" Click="NavigateToNextPage">
                             </Button.Style>
                         </Button>
                     </Grid>
-
-
-
-                   
                 </StackPanel>
             </Border>
         </StackPanel>

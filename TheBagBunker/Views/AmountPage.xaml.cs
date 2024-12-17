@@ -1,16 +1,20 @@
 ﻿using MySql.Data.MySqlClient;
 using NayaxAPI;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TheBagBunker.Helper;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
     /// <summary>
     /// Interaction logic for AmountPage.xaml
     /// </summary>
-    public partial class AmountPage : Page
+    public partial class AmountPage : Page, INotifyPropertyChanged
     {
         private int lockerId = 0;
         private int userId = 0;
@@ -26,6 +30,14 @@ namespace TheBagBunker.Views
         private readonly NayaxAdapter _nayaxAdapter;
         private decimal _AEDExchangeRate = 0.27M;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly LocalizationHelper _localizationHelper;
+
+        public string PageTitle => _localizationHelper.GetTranslation("amountPageTitle", CLanguage.currentLanguage);
+        public string Des => _localizationHelper.GetTranslation("amountPageDes", CLanguage.currentLanguage);
+        public string ButtonS => _localizationHelper.GetTranslation("amountPageButton", CLanguage.currentLanguage);
+
         public AmountPage(int lockerId, int userId, int timeSpentOnPreviousPage)
         {
             InitializeComponent();
@@ -38,6 +50,13 @@ namespace TheBagBunker.Views
                 SharedLibrary._lockIdleInterval - timeSpentOnPreviousPage;
             _isForLogin = false;
             _nayaxAdapter = new NayaxAdapter(_merchantId, _hashCode);
+            _localizationHelper = new LocalizationHelper("translations.json");
+            DataContext = this;
+
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public AmountPage(int lockerId, int userId)
@@ -48,6 +67,8 @@ namespace TheBagBunker.Views
             _timer = new Timer(DoTask, null, Timeout.Infinite, Timeout.Infinite);
             _isForLogin = true;
             _nayaxAdapter = new NayaxAdapter(_merchantId, _hashCode);
+            _localizationHelper = new LocalizationHelper("translations.json");
+            DataContext = this;
         }
 
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)

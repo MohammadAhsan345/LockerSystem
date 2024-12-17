@@ -32,14 +32,14 @@
                         <TextBlock Grid.Row="0" Text="" FontSize="24" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
                         <Grid HorizontalAlignment="Center" Grid.Row="1">
                             <Image Source="/Images/checkmark.png" Width="54" Height="56" VerticalAlignment="Top"  />
-                            <TextBlock Text="Successful Payment" FontSize="35" FontWeight="Bold" TextAlignment="Center" Padding="0,50,0,0"/>
-                            <TextBlock Text="Please drop off your luggage in the opened locker." FontSize="12"  TextAlignment="Center" Padding="0,120,0,5"/>
+                            <TextBlock Text="{Binding PageTitle}" FontSize="35" FontWeight="Bold" TextAlignment="Center" Padding="0,50,0,0"/>
+                            <TextBlock Text="{Binding SuccessDes}" FontSize="12"  TextAlignment="Center" Padding="0,120,0,5"/>
                         </Grid>
 
 
 
                         <Button Grid.Row="2" Name="loginButton" Background="#D52033"
-    Content="Go to Login Page" BorderBrush="#D3D3D3" Width="140"  Height="30" Foreground="White" FontWeight="Bold"
+    Content="{Binding ButtonS}" BorderBrush="#D3D3D3" Width="140"  Height="30" Foreground="White" FontWeight="Bold"
         HorizontalAlignment="Center" Click="NavigateToNextPage">
                                 <Button.Style>
                                     <Style TargetType="Button">

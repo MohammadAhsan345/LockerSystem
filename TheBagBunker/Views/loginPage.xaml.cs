@@ -1,20 +1,42 @@
 ﻿using MySql.Data.MySqlClient;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using TheBagBunker.Helper;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
     /// <summary>
     /// Interaction logic for loginPage.xaml
     /// </summary>
-    public partial class loginPage : Page
+    public partial class loginPage : Page, INotifyPropertyChanged
     {
         private SharedLibrary _sharedLibrary = new SharedLibrary();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly LocalizationHelper _localizationHelper;
+
+        public string PageTitle => _localizationHelper.GetTranslation("loginPageTitle", CLanguage.currentLanguage);
+        public string Op1 => _localizationHelper.GetTranslation("loginPagePhonr", CLanguage.currentLanguage);
+        public string Op2 => _localizationHelper.GetTranslation("loginPagePassword", CLanguage.currentLanguage);
+        public string ButtonB => _localizationHelper.GetTranslation("loginPageButton", CLanguage.currentLanguage);
+        public string NP => _localizationHelper.GetTranslation("loginPageNP", CLanguage.currentLanguage);
+        public string PP => _localizationHelper.GetTranslation("loginPagePP", CLanguage.currentLanguage);
+
         public loginPage()
         {
             InitializeComponent();
+            _localizationHelper = new LocalizationHelper("translations.json");
+            DataContext = this;
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private void NavigateToNextPage(object sender, System.Windows.RoutedEventArgs e)
         {

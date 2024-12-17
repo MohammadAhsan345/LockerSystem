@@ -1,18 +1,39 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TheBagBunker.Helper;
+using TheBagBunker.Model;
 
 namespace TheBagBunker.Views
 {
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Page1 : Page, INotifyPropertyChanged
     {
         private string _selectedBtnName = string.Empty;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly LocalizationHelper _localizationHelper;
+
+        public string PageTitle => _localizationHelper.GetTranslation("selectPageTitle", CLanguage.currentLanguage);
+        public string Op1 => _localizationHelper.GetTranslation("selectPageOp1", CLanguage.currentLanguage);
+        public string Op2 => _localizationHelper.GetTranslation("selectPageOp2", CLanguage.currentLanguage);
+        public string ButtonB => _localizationHelper.GetTranslation("selectPageBack", CLanguage.currentLanguage);
+        public string ButtonN => _localizationHelper.GetTranslation("selectPageNext", CLanguage.currentLanguage);
+
         public Page1()
         {
             InitializeComponent();
+            _localizationHelper = new LocalizationHelper("translations.json");
+            DataContext = this;
+        }
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void NavigateToNextPage(object sender, System.Windows.RoutedEventArgs e)
