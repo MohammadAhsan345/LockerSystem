@@ -89,7 +89,7 @@ namespace TheBagBunker.Views
                                         {
                                             DateTime lockerUpTime = Convert.ToDateTime(dt.Rows[0]["LockerUpTime"]);
                                             int lockerId = Convert.ToInt32(dt.Rows[0]["LockerId"]);
-                                            TimeSpan timeDifference = DateTime.Now - lockerUpTime;
+                                            TimeSpan timeDifference = DateTime.UtcNow - lockerUpTime;
 
                                             if (timeDifference.TotalHours >= 3)
                                             {
@@ -97,7 +97,9 @@ namespace TheBagBunker.Views
                                             }
                                             else
                                             {
-                                                this.NavigationService.Navigate(new lastPage());
+                                                bool signal = _sharedLibrary.FreeTheLockerAndUser(userId, lockerId, 0, "AED");
+                                                if (signal)
+                                                    this.NavigationService.Navigate(new lastPage());
                                             }
                                         }
                                     }

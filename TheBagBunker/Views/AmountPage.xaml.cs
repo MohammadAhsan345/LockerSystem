@@ -155,6 +155,22 @@ namespace TheBagBunker.Views
             };
             string result = _nayaxAdapter.InitiatePayment(transactionDetails);
 
+            // Simulate receiving a notification (Example response from Nayax)
+            var notification = new Dictionary<string, string>
+            {
+                {"ReplyDesc", "Transaction Successful"},
+                {"Reply", "000"},
+                {"replyCode", "000"},
+                {"trans_refNum", "123444"},
+                {"Order", "123444"},
+                {"trans_id", "1233"},
+                {"trans_amount", "10"},
+                {"trans_currency", "USD"}
+            };
+
+            // Handle the notification response
+            var notificationResponse = _nayaxAdapter.handleNotification(notification);
+
             isPaymentSucceded = true;
             if (isPaymentSucceded)
             {
