@@ -147,17 +147,7 @@ namespace TheBagBunker.Views
                 return;
             }
 
-            var transactionDetails = new Dictionary<string, string>
-            {
-                {"amount", (30 * _AEDExchangeRate).ToString()},
-                {"currency", "USD"},
-                {"orderId", "123444"},
-                {"methodCode", "visa"},
-                {"redirectUrl", "https://www.google.com/"},
-                {"notificationUrl", "https://www.google.com/"}
-            };
-            string result = _nayaxAdapter.InitiatePayment(transactionDetails);
-
+            ProceedWithPayment(30);
             isPaymentSucceded = true;
             if (isPaymentSucceded)
             {
@@ -169,17 +159,7 @@ namespace TheBagBunker.Views
 
         private void HandleLockerUpTimeOnLogin()
         {
-            var transactionDetails = new Dictionary<string, string>
-            {
-                {"amount", (30 * _AEDExchangeRate).ToString()},
-                {"currency", "USD"},
-                {"orderId", "123444"},
-                {"methodCode", "visa"},
-                {"redirectUrl", "https://www.google.com/"},
-                {"notificationUrl", "https://www.google.com/"}
-            };
-            string result = _nayaxAdapter.InitiatePayment(transactionDetails);
-
+            ProceedWithPayment(30);
             isPaymentSucceded = true;
             if (isPaymentSucceded)
             {
@@ -188,6 +168,38 @@ namespace TheBagBunker.Views
                     this.NavigationService.Navigate(new lastPage());
                 //this.NavigationService.Navigate(new successPayment());
             }
+        }
+
+        private bool ProceedWithPayment(decimal amount)
+        {
+            var transactionDetails = new Dictionary<string, string>
+            {
+                {"amount", (amount * _AEDExchangeRate).ToString()},
+                {"currency", "USD"},
+                {"orderId", "123444"},
+                {"methodCode", "visa"},
+                {"redirectUrl", "https://www.google.com/"},
+                {"notificationUrl", "https://www.google.com/"}
+            };
+            string result = _nayaxAdapter.InitiatePayment(transactionDetails);
+
+            // Simulate receiving a notification (Example response from Nayax)
+            var notification = new Dictionary<string, string>
+            {
+                {"ReplyDesc", "Transaction Successful"},
+                {"Reply", "000"},
+                {"replyCode", "000"},
+                {"trans_refNum", "123444"},
+                {"Order", "123444"},
+                {"trans_id", "1233"},
+                {"trans_amount", (amount * _AEDExchangeRate).ToString()},
+                {"trans_currency", "USD"}
+            };
+
+            // Handle the notification response
+            var notificationResponse = _nayaxAdapter.handleNotification(notification);
+
+            return notificationResponse["status"].ToUpper() == "SUCCESS";
         }
 
         private void AssignLocker()
