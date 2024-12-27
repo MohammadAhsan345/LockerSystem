@@ -2,9 +2,11 @@
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using TheBagBunker.Helper;
 using TheBagBunker.Model;
 
@@ -163,6 +165,7 @@ namespace TheBagBunker.Views
                 PlaceholderPassword.Visibility = Visibility.Collapsed;
             }
         }
+
         private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
             if (PasswordBox.Password.Length == 0)
@@ -170,6 +173,27 @@ namespace TheBagBunker.Views
                 PlaceholderPassword.Visibility = Visibility.Visible;
             }
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordTextBox.Text = PasswordBox.Password;
+            SetSelection(PasswordBox, PasswordTextBox.Text.Length, PasswordTextBox.Text.Length);
+        }
+
+        private void PasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PasswordTextBox.Text != "")
+            {
+                PlaceholderPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PlaceholderPassword.Visibility = Visibility.Visible;
+            }
+            PasswordBox.Password = PasswordTextBox.Text;
+        }
+
+
         private void TogglePasswordVisibilityButton_Click(object sender, RoutedEventArgs e)
         {
             if (PasswordBox.Visibility == Visibility.Visible)
@@ -178,6 +202,7 @@ namespace TheBagBunker.Views
                 PasswordTextBox.Text = PasswordBox.Password;
                 PasswordBox.Visibility = Visibility.Collapsed;
                 PasswordTextBox.Visibility = Visibility.Visible;
+                PasswordTextBox.Focus();
             }
             else
             {
@@ -185,20 +210,19 @@ namespace TheBagBunker.Views
                 PasswordBox.Password = PasswordTextBox.Text;
                 PasswordBox.Visibility = Visibility.Visible;
                 PasswordTextBox.Visibility = Visibility.Collapsed;
+                PasswordBox.Focus();
             }
         }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        public string ReverseString(string input)
         {
-            PasswordTextBox.Text = PasswordBox.Password; // Sync password to TextBox
+            // Convert string to char array, reverse it, and then return as a new string
+            char[] charArray = input.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
-
-        private void PasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SetSelection(PasswordBox passwordBox, int start, int length)
         {
-            PasswordBox.Password = PasswordTextBox.Text; // Sync plain text to PasswordBox
+            passwordBox.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(passwordBox, new object[] { start, length });
         }
-
-
-
     }
 }

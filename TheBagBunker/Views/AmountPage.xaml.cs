@@ -1,4 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using com.bitmick.marshall.models;
+using com.bitmick.marshall.protocol;
+using com.bitmick.marshall.utils;
+using MySql.Data.MySqlClient;
 using NayaxAPI;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TheBagBunker.Helper;
 using TheBagBunker.Model;
+using static com.bitmick.marshall.protocol.vmc_socket_t;
 
 namespace TheBagBunker.Views
 {

@@ -193,7 +193,6 @@ namespace TheBagBunker.Views
                                     {
                                         int userId = Convert.ToInt32(result);
                                         connection.Close();
-                                        MessageBox.Show("Data Inserted Successfully!!!");
                                         return (userId, lockerId, true);
                                     }
                                 }

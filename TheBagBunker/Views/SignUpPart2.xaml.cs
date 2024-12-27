@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -178,10 +179,19 @@ namespace TheBagBunker.Views
         private void PasswordBox2_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordTextBox2.Text = PasswordBox2.Password;
+            SetSelection(PasswordBox2, PasswordTextBox2.Text.Length, PasswordTextBox2.Text.Length);
         }
 
         private void PasswordTextBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (PasswordTextBox2.Text != "")
+            {
+                PlaceholderPassword2.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PlaceholderPassword2.Visibility = Visibility.Visible;
+            }
             PasswordBox2.Password = PasswordTextBox2.Text;
         }
 
@@ -228,11 +238,24 @@ namespace TheBagBunker.Views
         private void PasswordBox3_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordTextBox3.Text = PasswordBox3.Password;
+            SetSelection(PasswordBox3, PasswordTextBox3.Text.Length, PasswordTextBox3.Text.Length);
         }
 
         private void PasswordTextBox3_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (PasswordTextBox3.Text != "")
+            {
+                PlaceholderPassword3.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PlaceholderPassword3.Visibility = Visibility.Visible;
+            }
             PasswordBox3.Password = PasswordTextBox3.Text;
+        }
+        private void SetSelection(PasswordBox passwordBox, int start, int length)
+        {
+            passwordBox.GetType().GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(passwordBox, new object[] { start, length });
         }
 
     }

@@ -69,4 +69,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="vmc_framework">
+      <HintPath>..\marshall_cs_demo-0.0.5.2\vmc_framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
