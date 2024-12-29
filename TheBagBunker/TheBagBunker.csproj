@@ -37,6 +37,8 @@
     <PackageReference Include="AForge" Version="2.2.5" />
     <PackageReference Include="MySql.Data" Version="9.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Device.Gpio" Version="3.2.0" />
+    <PackageReference Include="System.IO.Ports" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,6 +72,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="HldMainBoard">
+      <HintPath>Include\HldMainBoard.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib_Office">
+      <HintPath>Include\Lib_Office.dll</HintPath>
+    </Reference>
     <Reference Include="vmc_framework">
       <HintPath>..\marshall_cs_demo-0.0.5.2\vmc_framework.dll</HintPath>
     </Reference>

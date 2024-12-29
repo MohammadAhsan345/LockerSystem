@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MainboardHelperLib;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TheBagBunker.Model;
@@ -8,16 +9,47 @@ namespace TheBagBunker.Views
     /// <summary>
     /// Interaction logic for languagePage.xaml
     /// </summary>
+    /// 
     public partial class languagePage : Page
     {
+        int[] arrayLockStatus;
+        int[] arraySensorStatus;
+        static int side = 0;
+        MainboardHelper mainBoardHelper;
+
         public languagePage()
         {
             InitializeComponent();
+            mainBoardHelper = new MainboardHelper();
         }
 
+        private string UpdateLockerStatus()
+        {
+            string strErr = "";
+            int[] arrayLockStatusNew = mainBoardHelper.GetAllLockStatus(side, out strErr);
+            if (arrayLockStatusNew == null)
+                return strErr;
+
+            int[] arraySensorStatusNew = mainBoardHelper.GetAllSensorStatus(side, out strErr);
+            if (arraySensorStatusNew == null)
+                return strErr;
+
+            for (int i = 0; i < arrayLockStatus.Length; i++)
+            {
+                if ((arrayLockStatus[i] != arrayLockStatusNew[i]) || (arraySensorStatus[i] != arraySensorStatusNew[i]))
+                {   //relay No. = i+1
+                    arrayLockStatus[i] = arrayLockStatusNew[i];
+                    arraySensorStatus[i] = arraySensorStatusNew[i];
+                    //frmBoxLayout.SetRelay(i, arrayLockStatus[i], arraySensorStatus[i]);         //Display New Status
+                }
+            }
+            return strErr;
+        }
 
         private void NavigateToNextPage(object sender, System.Windows.RoutedEventArgs e)
         {
+            UpdateLockerStatus();
+
             // Navigate to the next page
             if (CLanguage.currentLanguage == null)
             {
